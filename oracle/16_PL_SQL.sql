@@ -119,6 +119,9 @@ END;
 
     1) 선택문
     1-1) IF 구문   
+
+         [표현식]
+         IF 조건식 THEN 실행내용 END IF;
 */
 -- 사번을 입력받은 후 해당 사원의 사번(EID), 이름(ENAME), 
 -- 급여(SAL), 보너스(BONUS)를 출력
@@ -146,3 +149,82 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('보너스 : ' || BONUS);
 END;
 /
+
+/*
+    1-2) IF ~ ELSE 구문
+         [표현식]
+         IF 조건식 THEN 실행내용
+         ELSE 실행내용
+         END IF;
+*/
+SET SERVEROUTPUT ON;
+
+DECLARE 
+    EID EMPLOYEE.EMP_ID%TYPE;
+    ENAME EMPLOYEE.EMP_NAME%TYPE;
+    SAL EMPLOYEE.SALARY%TYPE;
+    BONUS EMPLOYEE.BONUS%TYPE;
+BEGIN 
+    SELECT EMP_ID, EMP_NAME, SALARY, NVL(BONUS, 0)
+    INTO EID, ENAME, SAL, BONUS 
+    FROM EMPLOYEE 
+    WHERE EMP_ID = '&사번';
+
+    DBMS_OUTPUT.PUT_LINE('사번 : ' || EID);
+    DBMS_OUTPUT.PUT_LINE('이름 : ' || ENAME);
+    DBMS_OUTPUT.PUT_LINE('급여 : ' || SAL);
+
+    IF(BONUS = 0) THEN 
+        DBMS_OUTPUT.PUT_LINE('보너스를 지급받지 않는 사원입니다.');
+    ELSE 
+        DBMS_OUTPUT.PUT_LINE('보너스 : ' || BONUS);
+    END IF;
+END;
+/
+
+-- 사용자가 입력한 사원의 사번(EID), 이름(ENAME), 부서명(DTITLE),
+-- 근무국가코드(NCODE) 조회 후 각 변수에 대입
+-- 일반타입변수 TEAM을 데이터 타입 VARCHAR2(10)으로 선언하고
+-- NCODE 값이 KO일 경우 => TEAM에 '국내팀' 대입, 
+--       그게 아닐 경우 => TEAM에 '해외팀' 대입
+-- 사번(EID), 이름(ENAME), 부서(DTITLE), 소속(TEAM)에 대해 출력
+DECLARE
+    EID EMPLOYEE.EMP_ID%TYPE;
+    ENAME EMPLOYEE.EMP_NAME%TYPE;
+    DTITLE DEPARTMENT.DEPT_TITLE%TYPE;
+    NCODE LOCATION.NATIONAL_CODE%TYPE;
+    TEAM VARCHAR2(10);
+BEGIN 
+    SELECT EMP_ID, EMP_NAME, DEPT_TITLE, NATIONAL_CODE
+    INTO EID, ENAME, DTITLE, NCODE 
+    FROM EMPLOYEE 
+    JOIN DEPARTMENT ON (DEPT_CODE = DEPT_ID)
+    JOIN LOCATION ON (LOCATION_ID = LOCAL_CODE)
+    WHERE EMP_ID = &사번;
+
+    IF NCODE = 'KO'
+        THEN TEAM := '국내팀';
+    ELSE 
+        TEAM := '해외팀';
+    END IF;
+
+    DBMS_OUTPUT.PUT_LINE('사번 : ' || EID);
+    DBMS_OUTPUT.PUT_LINE('이름 : ' || ENAME);
+    DBMS_OUTPUT.PUT_LINE('부서 : ' || DTITLE);
+    DBMS_OUTPUT.PUT_LINE('소속 : ' || TEAM);
+END;
+/
+/*
+    1-3) IF ~ ELSEIF ~ ELSE 구문
+         [표현식]
+         IF 조건식1 THEN 실행내용1
+         ELSEIF 조건식2 THEN 실행내용2
+         ...
+         [ELSE 실행내용N]
+         END IF;
+*/
+-- 사용자에게 점수를 입력받아 SCORE 변수(데이터타입 : NUMBER)에 저장한 후 
+-- 학점은 입력된 점수에 따라 GRADE 변수(데이터타입 : CHAR(1))에 저장
+-- 90점 이상은 'A', 80점 이상은 'B', 70점 이상은 'C', 60점 이상은 'D',
+--  60점 미만은 'F'
+-- 출력은 '당신의 점수는 95점이고, 학점은 A학점입니다.'와 같이 출력
