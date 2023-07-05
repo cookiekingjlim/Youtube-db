@@ -1,5 +1,7 @@
 package com.kh.model.vo;
 
+// 테이블 : TB_BOOK / 컬럼 : bk_no, bk_title, bk_author
+
 public class Book {
 	
 	private int bkNo;

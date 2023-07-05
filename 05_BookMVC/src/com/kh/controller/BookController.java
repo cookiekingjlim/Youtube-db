@@ -10,7 +10,7 @@ import com.kh.model.vo.Rent;
 public class BookController {
 
 	private BookDAO dao = new BookDAO();
-	private Member member = new Member();
+	private Member member = new Member(); // 로그인 정보 여기에 담아요!
 	
 	public ArrayList<Book> printBookAll() {
 		return null;
@@ -33,6 +33,8 @@ public class BookController {
 	}
 	
 	public boolean deleteMember() {
+		// 위에 member 변수있잖아요~~~
+		// 로그인때 담아놓아서~~ 매개변수 따로 안 받은 겁니다!
 		return false;
 	}
 	
