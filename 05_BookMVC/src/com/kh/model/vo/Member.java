@@ -14,10 +14,14 @@ public class Member {
 	public Member() {}
 	
 	public Member(String id, String password, String name) {
-		
+		this.memberId = id;
+		this.memberPwd = password;
+		this.memberName = name;
 	}
 
-	
+	public Member(int memberNo) {
+		this.memberNo = memberNo;
+	}
 
 	public int getMemberNo() {
 		return memberNo;
@@ -66,7 +70,11 @@ public class Member {
 	public void setEnrollDate(Date enrollDate) {
 		this.enrollDate = enrollDate;
 	}
-	
-	
 
+	@Override
+	public String toString() {
+		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberName="
+				+ memberName + ", status=" + status + ", enrollDate=" + enrollDate + "]";
+	}
+	
 }

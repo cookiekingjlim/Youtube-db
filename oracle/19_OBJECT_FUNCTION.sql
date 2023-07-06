@@ -62,3 +62,6 @@ PRINT VAR_CALC_SALARY;
 -- EMPLOYEE 테이블에서 방금 만든 함수(BONUS_CALC)를 이용해서
 -- 보너스를 포함한 연봉이 4000만원 이상인 사원의 
 -- 사번, 직원명, 급여, 보너스, 보너스를 포함한 연봉 조회
+SELECT EMP_ID, EMP_NAME, SALARY, BONUS, BONUS_CALC(EMP_ID)
+FROM EMPLOYEE 
+WHERE BONUS_CALC(EMP_ID) >= 40000000;
