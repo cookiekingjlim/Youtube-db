@@ -3,8 +3,10 @@ package com.youtube;
 import java.util.Scanner;
 
 import com.youtube.controller.YouTubeController;
+import com.youtube.model.vo.Category;
 import com.youtube.model.vo.Channel;
 import com.youtube.model.vo.Member;
+import com.youtube.model.vo.Video;
 
 public class Application {
 	
@@ -15,7 +17,7 @@ public class Application {
 		Application app = new Application();
 		//app.register();
 		//app.login();
-		app.addChannel();
+		//app.addChannel();
 		//app.myChannel();
 		//app.updateChannel();
 		//app.deleteChannel();
@@ -104,12 +106,30 @@ public class Application {
 	
 	// 비디오 추가
 	public void addVideo() {
+		yc.login("user1", "1234");
 		System.out.print("비디오 제목 : ");
 		String title = sc.nextLine();
 		System.out.print("비디오 URL : ");
 		String url = sc.nextLine();
 		System.out.print("비디오 썸네일 : ");
 		String image = sc.nextLine();
+		for(Category category : yc.categoryList()) {
+			System.out.println(category);
+		}
+		int categoryNo = 2;
+		Video video = new Video();
+		video.setVideoTitle(title);
+		video.setVideoUrl(url);
+		video.setVideoPhoto(image);
+		Category category = new Category();
+		category.setCategoryCode(categoryNo);
+		video.setCategory(category);
+
+		if(yc.addVideo(video)) {
+			System.out.println("비디오 추가 성공!");
+		} else {
+			System.out.println("비디오 추가 실패 ㅠㅠ");
+		}
 	}
 
 }

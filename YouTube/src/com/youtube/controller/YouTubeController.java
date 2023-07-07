@@ -1,10 +1,12 @@
 package com.youtube.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.youtube.model.dao.ChannelDAO;
 import com.youtube.model.dao.MemberDAO;
 import com.youtube.model.dao.VideoDAO;
+import com.youtube.model.vo.Category;
 import com.youtube.model.vo.Channel;
 import com.youtube.model.vo.Member;
 import com.youtube.model.vo.Video;
@@ -79,12 +81,24 @@ public class YouTubeController {
 	}
 	
 	public boolean addVideo(Video video) {
+		myChannel();
+		video.setChannel(this.channel);
+		video.setMember(this.member);
 		try {
 			if(videoDao.addVideo(video)==1) return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	public ArrayList<Category> categoryList() {
+		try {
+			return videoDao.categoryList();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
 

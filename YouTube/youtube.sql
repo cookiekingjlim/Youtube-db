@@ -163,6 +163,7 @@ COMMIT;
 -- 비디오 전체 목록보기
 SELECT * FROM VIDEO;
 
+
 -- 채널별 목록보기
 SELECT * FROM VIDEO WHERE CHANNEL_CODE=3;
 

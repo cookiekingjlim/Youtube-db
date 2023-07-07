@@ -91,7 +91,16 @@ public class VideoDAO implements VideoDAOTemplate {
 
 	@Override
 	public ArrayList<Category> categoryList() throws SQLException {
-		return null;
+		Connection conn = getConnect();
+		PreparedStatement st = conn.prepareStatement(p.getProperty("categoryList"));
+		
+		ResultSet rs = st.executeQuery();
+		ArrayList<Category> list = new ArrayList<>();
+		while(rs.next()) {
+			list.add(new Category(rs.getInt("category_code"), rs.getString("category_name")));
+		}
+		closeAll(rs, st, conn);
+		return list;
 	}
 
 }
