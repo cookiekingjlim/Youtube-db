@@ -4,8 +4,10 @@ import java.sql.SQLException;
 
 import com.youtube.model.dao.ChannelDAO;
 import com.youtube.model.dao.MemberDAO;
+import com.youtube.model.dao.VideoDAO;
 import com.youtube.model.vo.Channel;
 import com.youtube.model.vo.Member;
+import com.youtube.model.vo.Video;
 
 public class YouTubeController {
 
@@ -14,6 +16,7 @@ public class YouTubeController {
 	
 	private MemberDAO memberDao = new MemberDAO();
 	private ChannelDAO channelDao = new ChannelDAO();
+	private VideoDAO videoDao = new VideoDAO();
 	
 	public boolean register(Member member) {
 		try {
@@ -73,6 +76,15 @@ public class YouTubeController {
 			e.printStackTrace();
 		}
 		return channel;
+	}
+	
+	public boolean addVideo(Video video) {
+		try {
+			if(videoDao.addVideo(video)==1) return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }
 

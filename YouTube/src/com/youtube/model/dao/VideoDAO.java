@@ -49,7 +49,19 @@ public class VideoDAO implements VideoDAOTemplate {
 
 	@Override
 	public int addVideo(Video video) throws SQLException {
-		return 0;
+		Connection conn = getConnect();
+		PreparedStatement st = conn.prepareStatement(p.getProperty("addVideo"));
+		
+		st.setString(1, video.getVideoTitle());
+		st.setString(2, video.getVideoUrl());
+		st.setString(3, video.getVideoPhoto());
+		st.setInt(4, video.getCategory().getCategoryCode());
+		st.setInt(5, video.getChannel().getChannelCode());
+		st.setString(6, video.getMember().getMemberId());
+		
+		int result = st.executeUpdate();
+		closeAll(st, conn);
+		return result;
 	}
 
 	@Override

@@ -15,10 +15,11 @@ public class Application {
 		Application app = new Application();
 		//app.register();
 		//app.login();
-		//app.addChannel();
+		app.addChannel();
 		//app.myChannel();
 		//app.updateChannel();
-		app.deleteChannel();
+		//app.deleteChannel();
+		app.addVideo();
 	}
 	
 	// 회원가입
@@ -99,6 +100,16 @@ public class Application {
 		yc.login("user1", "1234");
 		Channel channel = yc.myChannel();
 		System.out.println(channel.getChannelName() + " / " + channel.getMember().getMemberNickname());
+	}
+	
+	// 비디오 추가
+	public void addVideo() {
+		System.out.print("비디오 제목 : ");
+		String title = sc.nextLine();
+		System.out.print("비디오 URL : ");
+		String url = sc.nextLine();
+		System.out.print("비디오 썸네일 : ");
+		String image = sc.nextLine();
 	}
 
 }
