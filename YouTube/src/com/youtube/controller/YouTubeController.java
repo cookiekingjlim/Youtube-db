@@ -101,6 +101,15 @@ public class YouTubeController {
 		return null;
 	}
 	
+	public ArrayList<Video> videoAllList() {
+		try {
+			return videoDao.videoAllList();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public boolean updateVideo(Video video) {
 		try {
 			if(videoDao.updateVideo(video)==1) return true;
@@ -112,7 +121,6 @@ public class YouTubeController {
 	
 	//updateVideo
 	//deleteVideo
-	//videoAllList
 	//channelVideoList
 	//viewVideo
 }

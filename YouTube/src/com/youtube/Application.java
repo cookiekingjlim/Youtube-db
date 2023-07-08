@@ -1,5 +1,6 @@
 package com.youtube;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.youtube.controller.YouTubeController;
@@ -17,11 +18,12 @@ public class Application {
 		Application app = new Application();
 		//app.register();
 		//app.login();
-		app.addChannel();
+		//app.addChannel();
 		//app.myChannel();
 		//app.updateChannel();
 		//app.deleteChannel();
 		//app.addVideo();
+		app.videoAllList();
 	}
 	
 	// 회원가입
@@ -134,6 +136,14 @@ public class Application {
 			System.out.println("비디오 추가 성공!");
 		} else {
 			System.out.println("비디오 추가 실패 ㅠㅠ");
+		}
+	}
+	
+	// 비디오 전체 목록보기
+	public void videoAllList() {
+		for(Video video : yc.videoAllList()) {
+			System.out.println(video.getVideoCode() + " / " + video.getVideoPhoto() + " / " + video.getVideoTitle() + " / " + video.getChannel().getChannelPhoto()
+								+ " / " + video.getChannel().getChannelName() + " / " + video.getVideoViews());
 		}
 	}
 	

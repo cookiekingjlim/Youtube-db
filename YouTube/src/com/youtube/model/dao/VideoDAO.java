@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.youtube.model.vo.Category;
+import com.youtube.model.vo.Channel;
 import com.youtube.model.vo.Video;
 
 import config.ServerInfo;
@@ -84,7 +85,27 @@ public class VideoDAO implements VideoDAOTemplate {
 
 	@Override
 	public ArrayList<Video> videoAllList() throws SQLException {
-		return null;
+		Connection conn = getConnect();
+		PreparedStatement st = conn.prepareStatement(p.getProperty("videoAllList"));
+		
+		ResultSet rs = st.executeQuery();
+		ArrayList<Video> list = new ArrayList<>();
+		while(rs.next()) {
+			Video video = new Video();
+			video.setVideoCode(rs.getInt("video_code"));
+			video.setVideoPhoto(rs.getString("video_photo"));
+			video.setVideoViews(rs.getInt("video_views"));
+			video.setVideoDate(rs.getDate("video_date"));
+			video.setVideoTitle(rs.getString("video_title"));
+			
+			Channel channel = new Channel();
+			channel.setChannelName(rs.getString("channel_name"));
+			channel.setChannelPhoto(rs.getString("channel_photo"));
+			video.setChannel(channel);
+			list.add(video);
+		}
+		closeAll(rs, st, conn);
+		return list;
 	}
 
 	@Override
