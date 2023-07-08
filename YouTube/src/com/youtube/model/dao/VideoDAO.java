@@ -80,7 +80,14 @@ public class VideoDAO implements VideoDAOTemplate {
 
 	@Override
 	public int deleteVideo(int videoCode) throws SQLException {
-		return 0;
+		Connection conn = getConnect();
+		PreparedStatement st = conn.prepareStatement(p.getProperty("deleteVideo"));
+		
+		st.setInt(1, videoCode);
+		
+		int result = st.executeUpdate();
+		closeAll(st, conn);
+		return result;
 	}
 
 	@Override

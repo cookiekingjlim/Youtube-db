@@ -129,6 +129,15 @@ public class YouTubeController {
 		return false;
 	}
 	
+	public boolean deleteVideo(int videoCode) {
+		try {
+			if(videoDao.deleteVideo(videoCode)==1) return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return false;
+	}
+	
 }
 
 

@@ -25,7 +25,8 @@ public class Application {
 //		app.addVideo();
 //		app.videoAllList();
 //		app.channelVideoList();
-		app.updateVideo();
+//		app.updateVideo();
+		app.deleteVideo();
 	}
 	
 	// 회원가입
@@ -178,6 +179,21 @@ public class Application {
 		
 	}
 
+	// 비디오 삭제
+	public void deleteVideo() {
+		
+		channelVideoList();
+		
+		System.out.print("삭제하고자 하는 비디오 선택 : ");
+		int videoCode = Integer.parseInt(sc.nextLine());
+		
+		if(yc.deleteVideo(videoCode)) {
+			System.out.println("비디오 삭제 성공!");
+		} else {
+			System.out.println("비디오 삭제 실패 ㅠㅠ");
+		}
+		
+	}
 }
 
 
