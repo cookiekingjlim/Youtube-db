@@ -22,8 +22,9 @@ public class Application {
 		//app.myChannel();
 		//app.updateChannel();
 		//app.deleteChannel();
-		//app.addVideo();
-		app.videoAllList();
+//		app.addVideo();
+//		app.videoAllList();
+		app.channelVideoList();
 	}
 	
 	// 회원가입
@@ -144,6 +145,15 @@ public class Application {
 		for(Video video : yc.videoAllList()) {
 			System.out.println(video.getVideoCode() + " / " + video.getVideoPhoto() + " / " + video.getVideoTitle() + " / " + video.getChannel().getChannelPhoto()
 								+ " / " + video.getChannel().getChannelName() + " / " + video.getVideoViews());
+		}
+	}
+	
+	// 내 채널에 있는 비디오 목록 보기 -> 나중에 웹에서는 채널 페이지로 들어가니 그때는 채널별 목록 보기가 될 것!
+	public void channelVideoList() {
+		yc.login("user1", "1234");
+		for(Video video : yc.channelVideoList()) {
+			System.out.println(video.getVideoCode() + " / " + video.getVideoPhoto() + " / " + video.getVideoTitle() + " / " + video.getChannel().getChannelPhoto()
+					+ " / " + video.getChannel().getChannelName() + " / " + video.getVideoViews());
 		}
 	}
 	
