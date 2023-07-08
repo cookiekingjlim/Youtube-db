@@ -129,9 +129,6 @@ public class YouTubeController {
 		return false;
 	}
 	
-	//updateVideo
-	//deleteVideo
-	//viewVideo
 }
 
 

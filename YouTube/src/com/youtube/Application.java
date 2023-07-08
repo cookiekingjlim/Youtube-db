@@ -24,7 +24,8 @@ public class Application {
 		//app.deleteChannel();
 //		app.addVideo();
 //		app.videoAllList();
-		app.channelVideoList();
+//		app.channelVideoList();
+		app.updateVideo();
 	}
 	
 	// 회원가입
@@ -160,8 +161,20 @@ public class Application {
 	// 비디오 수정
 	public void updateVideo() {
 		
+		channelVideoList();
+		
+		System.out.print("수정하고자 하는 비디오 선택 : ");
+		int videoCode = Integer.parseInt(sc.nextLine());
 		System.out.print("비디오 수정할 제목 : ");
 		String updateTitle = sc.nextLine();
+		Video video = new Video();
+		video.setVideoCode(videoCode);
+		video.setVideoTitle(updateTitle);
+		if(yc.updateVideo(video)) {
+			System.out.println("비디오 수정 성공!");
+		} else {
+			System.out.println("비디오 수정 실패 ㅠㅠ");
+		}
 		
 	}
 

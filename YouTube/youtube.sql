@@ -163,14 +163,14 @@ SELECT * FROM CATEGORY;
 
 -- 2023-07-08 ~ 여기부터 진행! ---------------------------------------------------------------------------------------------------------------------------
 
--- 비디오 전체 목록보기(videoAllList) : 비디오 썸네일(VIDEO_PHOTO), 비디오 제목(VIDEO_TITLE), 채널 프로필 사진, 채널 제목, 조회수, 비디오 업데이트 날짜
-SELECT * FROM VIDEO;
+-- 비디오 전체 목록보기(videoAllList) : 비디오 코드(VIDEO_CODE), 비디오 썸네일(VIDEO_PHOTO), 비디오 제목(VIDEO_TITLE), 채널 프로필 사진(CHANNEL_PHOTO), 채널 제목(CHANNEL_NAME), 조회수(VIDEO_VIEWS), 비디오 업데이트 날짜(VIDEO_DATE)
+SELECT VIDEO_CODE, VIDEO_PHOTO, VIDEO_TITLE, CHANNEL_PHOTO, CHANNEL_NAME, VIDEO_VIEWS, VIDEO_DATE FROM VIDEO JOIN CHANNEL USING(CHANNEL_CODE);
 
 -- 채널별 목록보기(channelVideoList) - 내 채널에 있는 비디오 목록 보기
-SELECT * FROM VIDEO WHERE CHANNEL_CODE=3;
+SELECT VIDEO_CODE, VIDEO_PHOTO, VIDEO_TITLE, CHANNEL_PHOTO, CHANNEL_NAME, VIDEO_VIEWS, VIDEO_DATE, CHANNEL_CODE FROM VIDEO JOIN CHANNEL USING(CHANNEL_CODE) WHERE CHANNEL_CODE=1;
 
 -- 비디오 수정(updateVideo)
-UPDATE VIDEO SET VIDEO_TITLE='강남에서 만화카페로 매출 8천 찍고 2호점까지 차린 60대 부부' WHERE VIDEO_CODE=2;
+UPDATE VIDEO SET VIDEO_TITLE='강남에서 만화카페로 매출 8천 찍고 2호점까지 차린 60대 부부' WHERE VIDEO_CODE=1;
 
 COMMIT;
 SELECT * FROM VIDEO;
