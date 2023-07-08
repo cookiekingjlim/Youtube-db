@@ -30,9 +30,10 @@ public class Application {
 //		app.channelVideoList();
 //		app.updateVideo();
 //		app.deleteVideo();
-		app.viewVideo();
+//		app.viewVideo();
 
 //		app.addComment();
+		app.updateComment();
 	}
 	
 	// 회원가입
@@ -242,10 +243,21 @@ public class Application {
 		}
 	}
 	
-	// 댓글 수정
+	// 댓글 수정 
 	public void updateComment() {
 		
+		viewVideo();
+		
+		System.out.print("수정할 댓글 선택 : ");
+		int commentNo = Integer.parseInt(sc.nextLine());
+		
+		System.out.print("수정할 댓글 : ");
+		String updateComment = sc.nextLine();
+		
 		VideoComment comment = new VideoComment();
+		comment.setCommentDesc(updateComment);
+		comment.setCommentCode(commentNo);
+		
 		if(yc.updateComment(comment)) {
 			System.out.println("댓글이 수정되었습니다.");
 		} else {
