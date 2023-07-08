@@ -33,6 +33,7 @@ CREATE TABLE CHANNEL(
     CHANNEL_NAME VARCHAR2(100) NOT NULL,
     CHANNEL_DESC VARCHAR2(200),
     CHANNEL_DATE DATE DEFAULT SYSDATE,
+    CHANNEL_PHOTO VARCHAR2(300),
     MEMBER_ID VARCHAR2(200)
 );
 
@@ -132,7 +133,9 @@ SELECT * FROM MEMBER;
 SELECT * FROM MEMBER WHERE MEMBER_ID='user1' AND MEMBER_PASSWORD='1234';
 
 -- 채널 추가(addChannel)
-INSERT INTO CHANNEL(CHANNEL_CODE, CHANNEL_NAME, MEMBER_ID) VALUES(SEQ_CHANNEL.NEXTVAL, 'Blue rain', 'user1');
+INSERT INTO CHANNEL(CHANNEL_CODE, CHANNEL_NAME, CHANNEL_PHOTO, MEMBER_ID) VALUES(SEQ_CHANNEL.NEXTVAL, 'Blue rain', 'PHOTO01', 'user1');
+COMMIT;
+SELECT * FROM CHANNEL;
 
 -- 채널 수정(updateChannel)
 UPDATE CHANNEL SET CHANNEL_NAME='주황색 ORANGE MUSIC' WHERE CHANNEL_CODE=1;
@@ -150,25 +153,54 @@ SELECT * FROM CHANNEL;
 
 -- 비디오 추가
 INSERT INTO VIDEO(VIDEO_CODE, VIDEO_TITLE, VIDEO_URL, VIDEO_PHOTO, CATEGORY_CODE, CHANNEL_CODE, MEMBER_ID)
-VALUES(SEQ_VIDEO.NEXTVAL, '250만원 받던 직장 그만두고 귀어해서 하루 500만원 버는 39살', 'URL01', 'PHOTO01', 1, 3, 'user1');
+VALUES(SEQ_VIDEO.NEXTVAL, '250만원 받던 직장 그만두고 귀어해서 하루 500만원 버는 39살', 'URL01', 'PHOTO01', 1, 1, 'user1');
 
--- 비디오 수정
-UPDATE VIDEO SET VIDEO_TITLE='강남에서 만화카페로 매출 8천 찍고 2호점까지 차린 60대 부부' WHERE VIDEO_CODE=1;
+COMMIT;
+SELECT * FROM VIDEO; 
 
--- 비디오 삭제
+-- 카테고리 보기(categoryList)
+SELECT * FROM CATEGORY;
+
+-- 2023-07-08 ~ 여기부터 진행! ---------------------------------------------------------------------------------------------------------------------------
+
+-- 비디오 전체 목록보기(videoAllList) : 비디오 썸네일(VIDEO_PHOTO), 비디오 제목(VIDEO_TITLE), 채널 프로필 사진, 채널 제목, 조회수, 비디오 업데이트 날짜
+SELECT * FROM VIDEO;
+
+-- 채널별 목록보기(channelVideoList) - 내 채널에 있는 비디오 목록 보기
+SELECT * FROM VIDEO WHERE CHANNEL_CODE=3;
+
+-- 비디오 수정(updateVideo)
+UPDATE VIDEO SET VIDEO_TITLE='강남에서 만화카페로 매출 8천 찍고 2호점까지 차린 60대 부부' WHERE VIDEO_CODE=2;
+
+COMMIT;
+SELECT * FROM VIDEO;
+
+-- 비디오 삭제(deleteVideo)
 DELETE FROM VIDEO WHERE VIDEO_CODE=1;
 
 COMMIT;
 
--- 비디오 전체 목록보기
-SELECT * FROM VIDEO;
-
-
--- 채널별 목록보기
-SELECT * FROM VIDEO WHERE CHANNEL_CODE=3;
-
--- 비디오 1개 보기
+-- 비디오 1개 보기(viewVideo)
 SELECT * FROM VIDEO WHERE VIDEO_CODE=1;
 
--- 카테고리 보기
-SELECT * FROM CATEGORY;
+-- 비디오 1개 보기에 따른 댓글들 보기 (videoCommentList)
+
+-- 좋아요 추가 (addLike)
+
+-- 좋아요 취소 (deleteLike)
+
+-- 댓글 추가 (addComment)
+
+-- 댓글 수정 (updateComment)
+
+-- 댓글 삭제 (deleteComment)
+
+-- 댓글 좋아요 추가 (addCommentLike)
+
+-- 댓글 좋아요 취소 (deleteCommentLike)
+
+-- 구독 추가(addSubscribe)
+
+-- 구독 취소(deleteSubscribe)
+
+-- 내가 구독한 채널 목록 보기(mySubscribeList)

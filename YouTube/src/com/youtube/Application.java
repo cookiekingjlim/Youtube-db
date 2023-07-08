@@ -17,11 +17,11 @@ public class Application {
 		Application app = new Application();
 		//app.register();
 		//app.login();
-		//app.addChannel();
+		app.addChannel();
 		//app.myChannel();
 		//app.updateChannel();
 		//app.deleteChannel();
-		app.addVideo();
+		//app.addVideo();
 	}
 	
 	// 회원가입
@@ -64,8 +64,13 @@ public class Application {
 		yc.login("user1", "1234");
 		System.out.print("채널명 : ");
 		String title = sc.nextLine();
+		System.out.print("채널 사진 : ");
+		String url = sc.nextLine();
+		
 		Channel channel = new Channel();
 		channel.setChannelName(title);
+		channel.setChannelPhoto(url);
+		
 		if(yc.addChannel(channel)) {
 			System.out.println("채널이 추가되었습니다~");
 		} else {
@@ -130,6 +135,14 @@ public class Application {
 		} else {
 			System.out.println("비디오 추가 실패 ㅠㅠ");
 		}
+	}
+	
+	// 비디오 수정
+	public void updateVideo() {
+		
+		System.out.print("비디오 수정할 제목 : ");
+		String updateTitle = sc.nextLine();
+		
 	}
 
 }

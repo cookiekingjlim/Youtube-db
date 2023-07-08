@@ -100,6 +100,21 @@ public class YouTubeController {
 		}
 		return null;
 	}
+	
+	public boolean updateVideo(Video video) {
+		try {
+			if(videoDao.updateVideo(video)==1) return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	//updateVideo
+	//deleteVideo
+	//videoAllList
+	//channelVideoList
+	//viewVideo
 }
 
 
