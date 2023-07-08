@@ -26,7 +26,8 @@ public class Application {
 //		app.videoAllList();
 //		app.channelVideoList();
 //		app.updateVideo();
-		app.deleteVideo();
+//		app.deleteVideo();
+		app.viewVideo();
 	}
 	
 	// 회원가입
@@ -192,6 +193,20 @@ public class Application {
 		} else {
 			System.out.println("비디오 삭제 실패 ㅠㅠ");
 		}
+		
+	}
+	
+	// 비디오 1개 보기
+	public void viewVideo() {
+		
+		videoAllList();
+		
+		System.out.print("비디오 선택 : ");
+		int videoCode = Integer.parseInt(sc.nextLine());
+		
+		Video video = yc.viewVideo(videoCode);
+		System.out.println(video.getVideoCode() + " / " + video.getVideoTitle() + " / " + video.getVideoDate() + " / " + video.getVideoViews() + " / " + video.getVideoUrl());
+		System.out.println(video.getChannel().getChannelName() + " / " + video.getChannel().getChannelPhoto());
 		
 	}
 }

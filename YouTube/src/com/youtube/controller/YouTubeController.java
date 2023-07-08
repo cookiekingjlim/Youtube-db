@@ -138,6 +138,14 @@ public class YouTubeController {
 		return false;
 	}
 	
+	public Video viewVideo(int videoCode) {
+		try {
+			return videoDao.viewVideo(videoCode);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
 
 

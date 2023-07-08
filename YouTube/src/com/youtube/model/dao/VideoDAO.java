@@ -143,7 +143,25 @@ public class VideoDAO implements VideoDAOTemplate {
 
 	@Override
 	public Video viewVideo(int videoCode) throws SQLException {
-		return null;
+		Connection conn = getConnect();
+		PreparedStatement st = conn.prepareStatement(p.getProperty("viewVideo"));
+		st.setInt(1, videoCode);
+		
+		ResultSet rs = st.executeQuery();
+		Video video = null;
+		if(rs.next()) {
+			video = new Video();
+			video.setVideoCode(rs.getInt("video_code"));
+			video.setVideoTitle(rs.getString("video_title"));
+			video.setVideoDate(rs.getDate("video_date"));
+			video.setVideoViews(rs.getInt("video_views"));
+			video.setVideoUrl(rs.getString("video_url"));
+			Channel channel = new Channel();
+			channel.setChannelName(rs.getString("channel_name"));
+			channel.setChannelPhoto(rs.getString("channel_photo"));
+			video.setChannel(channel);
+		}
+		return video;
 	}
 
 	@Override
