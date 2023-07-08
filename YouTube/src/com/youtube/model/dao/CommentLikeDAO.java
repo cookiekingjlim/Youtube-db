@@ -10,7 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.youtube.model.vo.Category;
 import com.youtube.model.vo.CommentLike;
+import com.youtube.model.vo.Member;
 import com.youtube.model.vo.VideoComment;
 import com.youtube.model.vo.VideoLike;
 
@@ -74,7 +76,15 @@ public class CommentLikeDAO implements CommentLikeDAOTemplate {
 
 	@Override
 	public int updateComment(VideoComment comment) throws SQLException {
-		return 0;
+		Connection conn = getConnect();
+		PreparedStatement st = conn.prepareStatement(p.getProperty("updateComment"));
+		
+		st.setString(1, comment.getCommentDesc());
+		st.setInt(2, comment.getCommentCode());
+		
+		int result = st.executeUpdate();
+		closeAll(st, conn);
+		return result;
 	}
 
 	@Override
@@ -84,7 +94,23 @@ public class CommentLikeDAO implements CommentLikeDAOTemplate {
 
 	@Override
 	public ArrayList<VideoComment> videoCommentList(int videoCode) throws SQLException {
-		return null;
+		Connection conn = getConnect();
+		PreparedStatement st = conn.prepareStatement(p.getProperty("videoCommentList"));
+		st.setInt(1, videoCode);
+		
+		ResultSet rs = st.executeQuery();
+		ArrayList<VideoComment> list = new ArrayList<>();
+		while(rs.next()) {
+			VideoComment comment = new VideoComment();
+			comment.setCommentCode(rs.getInt("comment_code"));
+			comment.setCommentDesc(rs.getString("comment_desc"));
+			Member member = new Member();
+			member.setMemberNickname(rs.getString("member_nickname"));
+			comment.setMember(member);
+			list.add(comment);
+		}
+		closeAll(rs, st, conn);
+		return list;
 	}
 
 	@Override

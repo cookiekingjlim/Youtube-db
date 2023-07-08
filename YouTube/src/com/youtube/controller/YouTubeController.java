@@ -159,6 +159,24 @@ public class YouTubeController {
 		}
 		return false;
 	}
+	
+	public ArrayList<VideoComment> videoCommentList(int video_code) {
+		try {
+			return commentDao.videoCommentList(video_code);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public boolean updateComment(VideoComment comment) {
+		try {
+			if(commentDao.updateComment(comment)==1) return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 }
 
 

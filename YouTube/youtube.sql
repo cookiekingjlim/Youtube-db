@@ -191,11 +191,14 @@ INSERT INTO VIDEO_COMMENT(COMMENT_CODE, COMMENT_DESC, VIDEO_CODE, MEMBER_ID) VAL
 COMMIT;
 SELECT * FROM VIDEO_COMMENT;
 
+-- 비디오 1개 보기에 따른 댓글들 보기 (videoCommentList)
+
 -- 댓글 수정 (updateComment)
+UPDATE VIDEO_COMMENT SET COMMENT_DESC='싫진 않아요' WHERE COMMENT_CODE=1;
+COMMIT;
+SELECT * FROM VIDEO_COMMENT;
 
 -- 댓글 삭제 (deleteComment)
-
--- 비디오 1개 보기에 따른 댓글들 보기 (videoCommentList)
 
 -- 좋아요 추가 (addLike)
 

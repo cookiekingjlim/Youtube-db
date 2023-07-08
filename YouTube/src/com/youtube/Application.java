@@ -30,9 +30,9 @@ public class Application {
 //		app.channelVideoList();
 //		app.updateVideo();
 //		app.deleteVideo();
-//		app.viewVideo();
+		app.viewVideo();
 
-		app.addComment();
+//		app.addComment();
 	}
 	
 	// 회원가입
@@ -201,7 +201,7 @@ public class Application {
 		
 	}
 	
-	// 비디오 1개 보기
+	// 비디오 1개 보기 + 댓글들 보기
 	public Video viewVideo() {
 		
 		videoAllList();
@@ -212,6 +212,12 @@ public class Application {
 		Video video = yc.viewVideo(videoCode);
 		System.out.println(video.getVideoCode() + " / " + video.getVideoTitle() + " / " + video.getVideoDate() + " / " + video.getVideoViews() + " / " + video.getVideoUrl());
 		System.out.println(video.getChannel().getChannelName() + " / " + video.getChannel().getChannelPhoto());
+		
+		System.out.println("============================");
+		
+		for(VideoComment comment : yc.videoCommentList(videoCode)) {
+			System.out.println(comment.getCommentCode() + " / " + comment.getMember().getMemberNickname() + " / " + comment.getCommentDesc());
+		}
 		
 		return video;
 		
@@ -234,6 +240,18 @@ public class Application {
 		} else {
 			System.out.println("댓글 작성하는데 에러 ㅠㅠ");
 		}
+	}
+	
+	// 댓글 수정
+	public void updateComment() {
+		
+		VideoComment comment = new VideoComment();
+		if(yc.updateComment(comment)) {
+			System.out.println("댓글이 수정되었습니다.");
+		} else {
+			System.out.println("댓글 수정하는데 에러 ㅠㅠ");
+		}
+		
 	}
 }
 
