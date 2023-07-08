@@ -4,12 +4,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.youtube.model.dao.ChannelDAO;
+import com.youtube.model.dao.CommentLikeDAO;
 import com.youtube.model.dao.MemberDAO;
 import com.youtube.model.dao.VideoDAO;
 import com.youtube.model.vo.Category;
 import com.youtube.model.vo.Channel;
 import com.youtube.model.vo.Member;
 import com.youtube.model.vo.Video;
+import com.youtube.model.vo.VideoComment;
 
 public class YouTubeController {
 
@@ -19,6 +21,7 @@ public class YouTubeController {
 	private MemberDAO memberDao = new MemberDAO();
 	private ChannelDAO channelDao = new ChannelDAO();
 	private VideoDAO videoDao = new VideoDAO();
+	private CommentLikeDAO commentDao = new CommentLikeDAO();
 	
 	public boolean register(Member member) {
 		try {
@@ -145,6 +148,16 @@ public class YouTubeController {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public boolean addComment(VideoComment comment) {
+		try {
+			comment.setMember(member);
+			if(commentDao.addComment(comment)==1) return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }
 

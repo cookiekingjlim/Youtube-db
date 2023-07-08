@@ -183,17 +183,23 @@ COMMIT;
 -- 비디오 1개 보기(viewVideo) : VIDEO_CODE / VIDEO_TITLE / VIDEO_DATE / VIDEO_VIEWS / VIDEO_URL / CHANNEL_NAME / CHANNEL_PHOTO
 SELECT VIDEO_CODE, VIDEO_TITLE, VIDEO_DATE, VIDEO_VIEWS, VIDEO_URL, CHANNEL_NAME, CHANNEL_PHOTO FROM VIDEO JOIN CHANNEL USING(CHANNEL_CODE) WHERE VIDEO_CODE=3;
 
+-- 댓글 추가 (addComment)
+
+SELECT * FROM VIDEO;
+
+INSERT INTO VIDEO_COMMENT(COMMENT_CODE, COMMENT_DESC, VIDEO_CODE, MEMBER_ID) VALUES(SEQ_VIDEO_COMMENT.NEXTVAL, '좋아요~~', 3, 'user1'); 
+COMMIT;
+SELECT * FROM VIDEO_COMMENT;
+
+-- 댓글 수정 (updateComment)
+
+-- 댓글 삭제 (deleteComment)
+
 -- 비디오 1개 보기에 따른 댓글들 보기 (videoCommentList)
 
 -- 좋아요 추가 (addLike)
 
 -- 좋아요 취소 (deleteLike)
-
--- 댓글 추가 (addComment)
-
--- 댓글 수정 (updateComment)
-
--- 댓글 삭제 (deleteComment)
 
 -- 댓글 좋아요 추가 (addCommentLike)
 

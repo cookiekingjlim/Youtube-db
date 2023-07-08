@@ -60,7 +60,16 @@ public class CommentLikeDAO implements CommentLikeDAOTemplate {
 
 	@Override
 	public int addComment(VideoComment comment) throws SQLException {
-		return 0;
+		Connection conn = getConnect();
+		PreparedStatement st = conn.prepareStatement(p.getProperty("addComment"));
+		
+		st.setString(1, comment.getCommentDesc());
+		st.setInt(2, comment.getVideo().getVideoCode());
+		st.setString(3, comment.getMember().getMemberId());
+		
+		int result = st.executeUpdate();
+		closeAll(st, conn);
+		return result;
 	}
 
 	@Override

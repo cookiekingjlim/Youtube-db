@@ -8,6 +8,7 @@ import com.youtube.model.vo.Category;
 import com.youtube.model.vo.Channel;
 import com.youtube.model.vo.Member;
 import com.youtube.model.vo.Video;
+import com.youtube.model.vo.VideoComment;
 
 public class Application {
 	
@@ -18,16 +19,20 @@ public class Application {
 		Application app = new Application();
 		//app.register();
 		//app.login();
+		
 		//app.addChannel();
 		//app.myChannel();
 		//app.updateChannel();
 		//app.deleteChannel();
+		
 //		app.addVideo();
 //		app.videoAllList();
 //		app.channelVideoList();
 //		app.updateVideo();
 //		app.deleteVideo();
-		app.viewVideo();
+//		app.viewVideo();
+
+		app.addComment();
 	}
 	
 	// 회원가입
@@ -197,7 +202,7 @@ public class Application {
 	}
 	
 	// 비디오 1개 보기
-	public void viewVideo() {
+	public Video viewVideo() {
 		
 		videoAllList();
 		
@@ -208,6 +213,27 @@ public class Application {
 		System.out.println(video.getVideoCode() + " / " + video.getVideoTitle() + " / " + video.getVideoDate() + " / " + video.getVideoViews() + " / " + video.getVideoUrl());
 		System.out.println(video.getChannel().getChannelName() + " / " + video.getChannel().getChannelPhoto());
 		
+		return video;
+		
+	}
+	
+	// 댓글 추가
+	public void addComment() {
+		
+		yc.login("user1", "1234");
+		Video video = viewVideo();
+		
+		System.out.print("댓글 작성 : ");
+		String commment = sc.nextLine();
+		
+		VideoComment comment = new VideoComment();
+		comment.setCommentDesc(commment);
+		comment.setVideo(video);
+		if(yc.addComment(comment)) {
+			System.out.println("댓글이 달렸습니다.");
+		} else {
+			System.out.println("댓글 작성하는데 에러 ㅠㅠ");
+		}
 	}
 }
 
