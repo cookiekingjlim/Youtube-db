@@ -177,6 +177,15 @@ public class YouTubeController {
 		}
 		return false;
 	}
+	
+	public boolean deleteComment(int commentCode) {
+		try {
+			if(commentDao.deleteComment(commentCode)==1) return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 }
 
 

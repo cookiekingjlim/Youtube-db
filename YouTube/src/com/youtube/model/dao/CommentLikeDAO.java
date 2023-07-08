@@ -89,7 +89,14 @@ public class CommentLikeDAO implements CommentLikeDAOTemplate {
 
 	@Override
 	public int deleteComment(int commentCode) throws SQLException {
-		return 0;
+		Connection conn = getConnect();
+		PreparedStatement st = conn.prepareStatement(p.getProperty("deleteComment"));
+		
+		st.setInt(1, commentCode);
+		
+		int result = st.executeUpdate();
+		closeAll(st, conn);
+		return result;
 	}
 
 	@Override

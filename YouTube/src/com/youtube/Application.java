@@ -33,7 +33,8 @@ public class Application {
 //		app.viewVideo();
 
 //		app.addComment();
-		app.updateComment();
+//		app.updateComment();
+		app.deleteComment();
 	}
 	
 	// 회원가입
@@ -262,6 +263,22 @@ public class Application {
 			System.out.println("댓글이 수정되었습니다.");
 		} else {
 			System.out.println("댓글 수정하는데 에러 ㅠㅠ");
+		}
+		
+	}
+	
+	// 댓글 삭제
+	public void deleteComment() {
+		
+		viewVideo();
+		
+		System.out.print("삭제할 댓글 선택 : ");
+		int commentNo = Integer.parseInt(sc.nextLine());
+		
+		if(yc.deleteComment(commentNo)) {
+			System.out.println("댓글이 삭제되었습니다.");
+		} else {
+			System.out.println("댓글 삭제하는데 에러 ㅠㅠ");
 		}
 		
 	}
