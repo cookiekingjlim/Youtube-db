@@ -82,7 +82,15 @@ public class MemberDAO implements MemberDAOTemplate {
 
 	@Override
 	public int addSubscribe(Subscribe subscribe) throws SQLException {
-		return 0;
+		Connection conn = getConnect();
+		PreparedStatement st = conn.prepareStatement(p.getProperty("addSubscribe"));
+		
+		st.setInt(1, subscribe.getChannel().getChannelCode());
+		st.setString(2, subscribe.getMember().getMemberId());
+		
+		int result = st.executeUpdate();
+		closeAll(st, conn);
+		return result;
 	}
 
 	@Override

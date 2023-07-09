@@ -11,6 +11,7 @@ import com.youtube.model.vo.Category;
 import com.youtube.model.vo.Channel;
 import com.youtube.model.vo.CommentLike;
 import com.youtube.model.vo.Member;
+import com.youtube.model.vo.Subscribe;
 import com.youtube.model.vo.Video;
 import com.youtube.model.vo.VideoComment;
 import com.youtube.model.vo.VideoLike;
@@ -234,6 +235,23 @@ public class YouTubeController {
 		like.setMember(member);
 		try {
 			if(commentDao.deleteLike(like)==1) return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean addSubscribe(int channelCode) {
+		
+		Subscribe subs = new Subscribe();
+		subs.setMember(member);
+		
+		Channel channel = new Channel();
+		channel.setChannelCode(channelCode);
+		subs.setChannel(channel);
+		
+		try {
+			if(memberDao.addSubscribe(subs)==1) return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

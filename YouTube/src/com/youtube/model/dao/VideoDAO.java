@@ -159,6 +159,7 @@ public class VideoDAO implements VideoDAOTemplate {
 			Channel channel = new Channel();
 			channel.setChannelName(rs.getString("channel_name"));
 			channel.setChannelPhoto(rs.getString("channel_photo"));
+			channel.setChannelCode(rs.getInt("channel_code"));
 			video.setChannel(channel);
 		}
 		return video;

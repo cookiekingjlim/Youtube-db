@@ -40,7 +40,9 @@ public class Application {
 //		app.addCommentLike();
 //		app.deleteCommentLike();
 //		app.addLike();
-		app.deleteLike();
+//		app.deleteLike();
+		
+		app.addSubscribe();
 	}
 	
 	// 회원가입
@@ -219,7 +221,7 @@ public class Application {
 		
 		Video video = yc.viewVideo(videoCode);
 		System.out.println(video.getVideoCode() + " / " + video.getVideoTitle() + " / " + video.getVideoDate() + " / " + video.getVideoViews() + " / " + video.getVideoUrl());
-		System.out.println(video.getChannel().getChannelName() + " / " + video.getChannel().getChannelPhoto());
+		System.out.println(video.getChannel().getChannelCode() + " / " + video.getChannel().getChannelName() + " / " + video.getChannel().getChannelPhoto());
 		
 		System.out.println("============================");
 		
@@ -342,6 +344,21 @@ public class Application {
 			System.out.println("좋아요 취소!");
 		} else {
 			System.out.println("좋아요 취소가 안돼 ㅠㅠ");
+		}
+	}
+	
+	// 일단 전체 동영상 목록에서 구독하는 기능만! -> 나중에 웹에 들어가면서 더 확장성 있게 생각!
+	public void addSubscribe() {
+		yc.login("user1", "1234");
+		viewVideo();
+		
+		System.out.print("구독할 채널 선택 : ");
+		int select = Integer.parseInt(sc.nextLine());
+
+		if(yc.addSubscribe(select)) {
+			System.out.println("구독!");
+		} else {
+			System.out.println("구독이 안돼 ㅠㅠ");
 		}
 	}
 }
