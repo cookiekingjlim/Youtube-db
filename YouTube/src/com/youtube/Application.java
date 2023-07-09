@@ -42,7 +42,8 @@ public class Application {
 //		app.addLike();
 //		app.deleteLike();
 		
-		app.addSubscribe();
+//		app.addSubscribe();
+		app.mySubscribeList();
 	}
 	
 	// 회원가입
@@ -347,7 +348,7 @@ public class Application {
 		}
 	}
 	
-	// 일단 전체 동영상 목록에서 구독하는 기능만! -> 나중에 웹에 들어가면서 더 확장성 있게 생각!
+	// 채널 구독
 	public void addSubscribe() {
 		yc.login("user1", "1234");
 		viewVideo();
@@ -357,6 +358,30 @@ public class Application {
 
 		if(yc.addSubscribe(select)) {
 			System.out.println("구독!");
+		} else {
+			System.out.println("구독이 안돼 ㅠㅠ");
+		}
+	}
+	
+	// 내가 구독한 채널 목록 보기
+	public void mySubscribeList() {
+		yc.login("user1", "1234");
+		
+		for(Channel channel : yc.mySubscribeList()) {
+			System.out.println(channel.getChannelCode() + " / " + channel.getChannelName() + " / " + channel.getChannelPhoto());
+		}
+	}
+	
+	// 채널 구독 취소
+	public void deleteSubscribe() {
+		yc.login("user1", "1234");
+		viewVideo();
+		
+		System.out.print("구독 취소할 채널 선택 : ");
+		int select = Integer.parseInt(sc.nextLine());
+
+		if(yc.addSubscribe(select)) {
+			System.out.println("구독 취소");
 		} else {
 			System.out.println("구독이 안돼 ㅠㅠ");
 		}

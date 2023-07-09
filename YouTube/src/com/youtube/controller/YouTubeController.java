@@ -257,6 +257,32 @@ public class YouTubeController {
 		}
 		return false;
 	}
+	
+	public ArrayList<Channel> mySubscribeList() {
+		try {
+			return memberDao.mySubscribeList(member.getMemberId());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public boolean deleteSubscribe(int channelCode) {
+		
+		Subscribe subs = new Subscribe();
+		subs.setMember(member);
+		
+		Channel channel = new Channel();
+		channel.setChannelCode(channelCode);
+		subs.setChannel(channel);
+		
+		try {
+			if(memberDao.deleteSubscribe(subs)==1) return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 }
 
 
