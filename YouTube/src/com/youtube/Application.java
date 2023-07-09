@@ -34,7 +34,9 @@ public class Application {
 
 //		app.addComment();
 //		app.updateComment();
-		app.deleteComment();
+//		app.deleteComment();
+		
+		app.addCommentLike();
 	}
 	
 	// 회원가입
@@ -281,6 +283,21 @@ public class Application {
 			System.out.println("댓글 삭제하는데 에러 ㅠㅠ");
 		}
 		
+	}
+	
+	// 댓글 좋아요 추가
+	public void addCommentLike() {
+		
+		viewVideo();
+		
+		System.out.print("좋아요할 댓글 선택 : ");
+		int like = Integer.parseInt(sc.nextLine());
+		
+		if(yc.addCommetLike(like)) {
+			System.out.println("댓글 좋아요 추가~");
+		} else {
+			System.out.println("댓글 좋아요 취소 ㅠㅠ");
+		}
 	}
 }
 

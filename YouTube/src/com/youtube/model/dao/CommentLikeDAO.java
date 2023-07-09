@@ -122,7 +122,15 @@ public class CommentLikeDAO implements CommentLikeDAOTemplate {
 
 	@Override
 	public int addCommentLike(CommentLike like) throws SQLException {
-		return 0;
+		Connection conn = getConnect();
+		PreparedStatement st = conn.prepareStatement(p.getProperty("addCommentLike"));
+		
+		st.setInt(1, like.getComment().getCommentCode());
+		st.setString(2, like.getMember().getMemberId());
+		
+		int result = st.executeUpdate();
+		closeAll(st, conn);
+		return result;
 	}
 
 	@Override

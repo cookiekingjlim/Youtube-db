@@ -204,13 +204,19 @@ DELETE FROM VIDEO_COMMENT WHERE COMMENT_CODE=1;
 COMMIT;
 SELECT * FROM VIDEO_COMMENT;
 
+-- 댓글 좋아요 추가 (addCommentLike)
+INSERT INTO COMMENT_LIKE(COMM_LIKE_CODE, COMMENT_CODE, MEMBER_ID) VALUES(SEQ_COMMENT_LIKE.NEXTVAL, 3, 'user1');
+COMMIT;
+SELECT * FROM COMMENT_LIKE;
+
+-- 댓글 좋아요 취소 (deleteCommentLike)
+DELETE FROM COMMENT_LIKE WHERE COMM_LIKE_CODE=1;
+COMMIT;
+SELECT * FROM COMMENT_LIKE;
+
 -- 좋아요 추가 (addLike)
 
 -- 좋아요 취소 (deleteLike)
-
--- 댓글 좋아요 추가 (addCommentLike)
-
--- 댓글 좋아요 취소 (deleteCommentLike)
 
 -- 구독 추가(addSubscribe)
 

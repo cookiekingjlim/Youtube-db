@@ -9,6 +9,7 @@ import com.youtube.model.dao.MemberDAO;
 import com.youtube.model.dao.VideoDAO;
 import com.youtube.model.vo.Category;
 import com.youtube.model.vo.Channel;
+import com.youtube.model.vo.CommentLike;
 import com.youtube.model.vo.Member;
 import com.youtube.model.vo.Video;
 import com.youtube.model.vo.VideoComment;
@@ -181,6 +182,20 @@ public class YouTubeController {
 	public boolean deleteComment(int commentCode) {
 		try {
 			if(commentDao.deleteComment(commentCode)==1) return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean addCommetLike(int commentCode) {
+		try {
+			CommentLike like = new CommentLike();
+			like.setMember(member);
+			VideoComment comment = new VideoComment();
+			comment.setCommentCode(commentCode);
+			like.setComment(comment);
+			if(commentDao.addCommentLike(like)==1) return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
