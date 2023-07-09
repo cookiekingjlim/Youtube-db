@@ -43,7 +43,8 @@ public class Application {
 //		app.deleteLike();
 		
 //		app.addSubscribe();
-		app.mySubscribeList();
+//		app.mySubscribeList();
+		app.deleteSubscribe();
 	}
 	
 	// 회원가입
@@ -374,13 +375,12 @@ public class Application {
 	
 	// 채널 구독 취소
 	public void deleteSubscribe() {
-		yc.login("user1", "1234");
-		viewVideo();
+		mySubscribeList();
 		
 		System.out.print("구독 취소할 채널 선택 : ");
 		int select = Integer.parseInt(sc.nextLine());
 
-		if(yc.addSubscribe(select)) {
+		if(yc.deleteSubscribe(select)) {
 			System.out.println("구독 취소");
 		} else {
 			System.out.println("구독이 안돼 ㅠㅠ");
