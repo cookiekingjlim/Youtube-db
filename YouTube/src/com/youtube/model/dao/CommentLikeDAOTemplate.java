@@ -21,7 +21,7 @@ public interface CommentLikeDAOTemplate {
 	// VideoLike
 	// 좋아요 추가, 좋아요 취소
 	int addLike(VideoLike like) throws SQLException;
-	int deleteLike(int likeCode) throws SQLException;
+	int deleteLike(VideoLike like) throws SQLException;
 	
 	// VideoComment
 	// 댓글 추가, 수정, 삭제
@@ -36,10 +36,5 @@ public interface CommentLikeDAOTemplate {
 	// 댓글 좋아요 추가, 댓글 좋아요 취소
 	int addCommentLike(CommentLike like) throws SQLException;
 	int deleteCommentLike(int likeCode) throws SQLException;
-	
-	
-	
-	
-	
 	
 }

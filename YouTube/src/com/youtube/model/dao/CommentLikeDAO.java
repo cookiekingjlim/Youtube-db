@@ -64,8 +64,16 @@ public class CommentLikeDAO implements CommentLikeDAOTemplate {
 	}
 
 	@Override
-	public int deleteLike(int likeCode) throws SQLException {
-		return 0;
+	public int deleteLike(VideoLike like) throws SQLException {
+		Connection conn = getConnect();
+		PreparedStatement st = conn.prepareStatement(p.getProperty("deleteLike"));
+		
+		st.setInt(1, like.getVideo().getVideoCode());
+		st.setString(2, like.getMember().getMemberId());
+		
+		int result = st.executeUpdate();
+		closeAll(st, conn);
+		return result;
 	}
 
 	@Override

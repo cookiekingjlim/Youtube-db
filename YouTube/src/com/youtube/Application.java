@@ -39,7 +39,8 @@ public class Application {
 		
 //		app.addCommentLike();
 //		app.deleteCommentLike();
-		app.addLike();
+//		app.addLike();
+		app.deleteLike();
 	}
 	
 	// 회원가입
@@ -328,6 +329,19 @@ public class Application {
 			System.out.println("좋아요~");
 		} else {
 			System.out.println("좋아요가 안돼 ㅠㅠ");
+		}
+	}
+	
+	// 좋아요 취소
+	public void deleteLike() {
+		
+		yc.login("user1", "1234");
+		Video video = viewVideo();
+		
+		if(yc.deleteLike(video.getVideoCode())) {
+			System.out.println("좋아요 취소!");
+		} else {
+			System.out.println("좋아요 취소가 안돼 ㅠㅠ");
 		}
 	}
 }

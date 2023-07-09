@@ -225,6 +225,20 @@ public class YouTubeController {
 		}
 		return false;
 	}
+	
+	public boolean deleteLike(int videoCode) {
+		VideoLike like = new VideoLike();
+		Video video = new Video();
+		video.setVideoCode(videoCode);
+		like.setVideo(video);
+		like.setMember(member);
+		try {
+			if(commentDao.deleteLike(like)==1) return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 }
 
 
