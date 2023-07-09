@@ -13,6 +13,7 @@ import com.youtube.model.vo.CommentLike;
 import com.youtube.model.vo.Member;
 import com.youtube.model.vo.Video;
 import com.youtube.model.vo.VideoComment;
+import com.youtube.model.vo.VideoLike;
 
 public class YouTubeController {
 
@@ -205,6 +206,20 @@ public class YouTubeController {
 	public boolean deleteCommentLike(int commentCode) {
 		try {
 			if(commentDao.deleteCommentLike(commentCode)==1) return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean addLike(int videoCode) {
+		VideoLike like = new VideoLike();
+		Video video = new Video();
+		video.setVideoCode(videoCode);
+		like.setVideo(video);
+		like.setMember(member);
+		try {
+			if(commentDao.addLike(like)==1) return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
