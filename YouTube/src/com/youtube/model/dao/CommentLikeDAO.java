@@ -100,21 +100,27 @@ public class CommentLikeDAO implements CommentLikeDAOTemplate {
 	}
 
 	@Override
-	public ArrayList<VideoComment> videoCommentList(int videoCode) throws SQLException {
+	public ArrayList<CommentLike> videoCommentList(int videoCode) throws SQLException {
 		Connection conn = getConnect();
 		PreparedStatement st = conn.prepareStatement(p.getProperty("videoCommentList"));
 		st.setInt(1, videoCode);
 		
 		ResultSet rs = st.executeQuery();
-		ArrayList<VideoComment> list = new ArrayList<>();
+		ArrayList<CommentLike> list = new ArrayList<>();
 		while(rs.next()) {
+			CommentLike like = new CommentLike();
+			like.setCommLikeCode(rs.getInt("comm_like_code"));
+			
 			VideoComment comment = new VideoComment();
 			comment.setCommentCode(rs.getInt("comment_code"));
 			comment.setCommentDesc(rs.getString("comment_desc"));
+			like.setComment(comment);
+			
 			Member member = new Member();
 			member.setMemberNickname(rs.getString("member_nickname"));
-			comment.setMember(member);
-			list.add(comment);
+			like.setMember(member);
+			
+			list.add(like);
 		}
 		closeAll(rs, st, conn);
 		return list;
@@ -135,7 +141,14 @@ public class CommentLikeDAO implements CommentLikeDAOTemplate {
 
 	@Override
 	public int deleteCommentLike(int likeCode) throws SQLException {
-		return 0;
+		Connection conn = getConnect();
+		PreparedStatement st = conn.prepareStatement(p.getProperty("deleteCommentLike"));
+		
+		st.setInt(1, likeCode);
+		
+		int result = st.executeUpdate();
+		closeAll(st, conn);
+		return result;
 	}
 
 }

@@ -24,11 +24,13 @@ public interface CommentLikeDAOTemplate {
 	int deleteLike(int likeCode) throws SQLException;
 	
 	// VideoComment
-	// 댓글 추가, 수정, 삭제, 비디오 1개 보기에 따른 댓글들 보기
+	// 댓글 추가, 수정, 삭제
 	int addComment(VideoComment comment) throws SQLException;
 	int updateComment(VideoComment comment) throws SQLException;
 	int deleteComment(int commentCode) throws SQLException;
-	ArrayList<VideoComment> videoCommentList(int videoCode) throws SQLException;
+	
+	// 비디오 1개 보기에 따른 댓글들 보기 (좋아요 포함)
+	ArrayList<CommentLike> videoCommentList(int videoCode) throws SQLException;
 	
 	// CommentLike
 	// 댓글 좋아요 추가, 댓글 좋아요 취소

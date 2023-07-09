@@ -6,6 +6,7 @@ import java.util.Scanner;
 import com.youtube.controller.YouTubeController;
 import com.youtube.model.vo.Category;
 import com.youtube.model.vo.Channel;
+import com.youtube.model.vo.CommentLike;
 import com.youtube.model.vo.Member;
 import com.youtube.model.vo.Video;
 import com.youtube.model.vo.VideoComment;
@@ -36,7 +37,8 @@ public class Application {
 //		app.updateComment();
 //		app.deleteComment();
 		
-		app.addCommentLike();
+//		app.addCommentLike();
+		app.deleteCommentLike();
 	}
 	
 	// 회원가입
@@ -205,7 +207,7 @@ public class Application {
 		
 	}
 	
-	// 비디오 1개 보기 + 댓글들 보기
+	// 비디오 1개 보기 + 댓글들 보기 (좋아요 포함)
 	public Video viewVideo() {
 		
 		videoAllList();
@@ -219,8 +221,8 @@ public class Application {
 		
 		System.out.println("============================");
 		
-		for(VideoComment comment : yc.videoCommentList(videoCode)) {
-			System.out.println(comment.getCommentCode() + " / " + comment.getMember().getMemberNickname() + " / " + comment.getCommentDesc());
+		for(CommentLike like : yc.videoCommentList(videoCode)) {
+			System.out.println(like.getCommLikeCode() + " / " + like.getComment().getCommentCode() + " / " + like.getMember().getMemberNickname() + " / " + like.getComment().getCommentDesc());
 		}
 		
 		return video;
@@ -297,6 +299,21 @@ public class Application {
 			System.out.println("댓글 좋아요 추가~");
 		} else {
 			System.out.println("댓글 좋아요 취소 ㅠㅠ");
+		}
+	}
+	
+	// 댓글 좋아요 취소
+	public void deleteCommentLike() {
+		
+		viewVideo();
+		
+		System.out.print("좋아요할 댓글 취소 : ");
+		int like = Integer.parseInt(sc.nextLine());
+		
+		if(yc.deleteCommentLike(like)) {
+			System.out.println("댓글 좋아요 취소~");
+		} else {
+			System.out.println("댓글 좋아요 취소가 안돼 ㅠㅠ");
 		}
 	}
 }

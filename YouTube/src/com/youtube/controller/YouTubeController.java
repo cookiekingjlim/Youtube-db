@@ -161,7 +161,7 @@ public class YouTubeController {
 		return false;
 	}
 	
-	public ArrayList<VideoComment> videoCommentList(int video_code) {
+	public ArrayList<CommentLike> videoCommentList(int video_code) {
 		try {
 			return commentDao.videoCommentList(video_code);
 		} catch (SQLException e) {
@@ -196,6 +196,15 @@ public class YouTubeController {
 			comment.setCommentCode(commentCode);
 			like.setComment(comment);
 			if(commentDao.addCommentLike(like)==1) return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean deleteCommentLike(int commentCode) {
+		try {
+			if(commentDao.deleteCommentLike(commentCode)==1) return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
